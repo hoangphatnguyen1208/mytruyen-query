@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.exc import SQLAlchemyError
-from sqlmodel.ext.asyncio.session import AsyncSession
 
-from app.core.db import SessionDep
+from app.api.depend import SessionDep
 from app.schema import GeneratedQuery, NaturalLanguageQueryRequest, QueryResult
 from app.service.sql_generator import generate_sql
 from app.service.sql_executor import execute_readonly_sql
@@ -20,7 +19,7 @@ async def preview_query(payload: NaturalLanguageQueryRequest) -> GeneratedQuery:
     except InvalidSQL as error:
         raise HTTPException(status_code=422, detail=str(error)) from error
     
-@router.post("/execute", response_model=QueryResult)
+@router.post("/query", response_model=QueryResult)
 async def execute_query(
     session: SessionDep,
     payload: NaturalLanguageQueryRequest,

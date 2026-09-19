@@ -25,7 +25,7 @@ export default function Home() {
     setError("");
 
     try {
-      const response = await fetch("/api/query/execute", {
+      const response = await fetch("/api/nl-query/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: value }),

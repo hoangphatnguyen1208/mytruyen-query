@@ -3,9 +3,6 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.core.config import settings
 
-from fastapi import Depends
-from typing import Annotated
-
 
 engine = create_async_engine(
     settings.POSTGRES_URL,
@@ -18,10 +15,3 @@ session_factory = async_sessionmaker(
     class_=AsyncSession,
     expire_on_commit=False,
 )
-
-
-async def get_session():
-    async with session_factory() as session:
-        yield session
-
-SessionDep = Annotated[AsyncSession, Depends(get_session)]

@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const response = await fetch(`${serviceUrl}/nl-query/execute`, {
+    const response = await fetch(`${serviceUrl}/nl-query/query`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question }),
